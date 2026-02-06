@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacy</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            let patientSelect = document.getElementById("patientSelectLogin");
+            console.log([[${allPatients}]]);
+
+            [[${allPatients}]].forEach((patient) => {
+                let option = document.createElement("option");
+
+                option.setAttribute("id", `option-${patient.id}`);
+                option.setAttribute("value", patient.id);
+                option.textContent = `${patient.name} ${patient.surname}`;
+
+                patientSelect.appendChild(option);
+            });
+        });
+
+        function patientSelectChange() {
+            document.getElementById("button-login").disabled = document.getElementById("patientSelectLogin").value === "none";
+        }
+
+        function loginClick() {
+            let selectedPatientId = document.getElementById("patientSelectLogin").value;
+            window.location = "http://localhost:8081/prescriptions?CurrentPatientId=" + selectedPatientId;
+        }
+
+        async function registerNewPatientClick ( ) {
+
+            if ( document.getElementById("name-input").value.trim() === '' )
+            {
+                alert ("Name cannot be empty");
+                return;
+            }
+
+            if ( document.getElementById("surname-input").value.trim() === '' )
+            {
+                alert ("Surname name cannot be empty");
+                return;
+            }
+
+            if ( document.getElementById("birth-year-input").value.trim() === '' )
+            {
+                alert ("Birth year cannot be empty");
+                return;
+            }
+
+            if ( document.getElementById("name-input").value.trim() === 'none' )
+            {
+                alert ("Name 'none' cannot be used!");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8080/rest/api/patient', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById("name-input").value,
+                        surname: document.getElementById("surname-input").value,
+                        birthYear: document.getElementById("birth-year-input").value,
+                        prescriptionIds: []
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    alert(`Failed to register patient: ${errorMessage}`);
+                    return;
+                }
+
+                const responseData = await response.json();
+                const currentPatientId = responseData.id;
+
+                console.log('New Patient Registered:', responseData);
+
+                window.location = `http://localhost:8081/prescriptions?CurrentPatientId=${currentPatientId}`;
+            } catch (error) {
+                console.error('Error registering new patient:', error);
+                alert('An error occurred while registering the new patient. Please try again.');
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="parts">
+        <h1>Welcome to Pharmacy</h1>
+        <div class="part">
+            <label for="patientSelectLogin">Login as:</label>
+            <select id="patientSelectLogin" class="patientSelectLogin" onchange="patientSelectChange()">
+                <option value="none">none</option>
+            </select>
+
+            <button id="button-login" class="buttonLogin" onclick="loginClick()" disabled>Login</button>
+        </div>
+
+        <div class="part">
+            <p>Register new patient</p>
+            <label for="name-input"></label>
+            <input type="text" id="name-input" placeholder="Enter name" />
+
+            <label for="surname-input"></label>
+            <input type="text" id="surname-input" placeholder="Enter surname" />
+
+            <label for="birth-year-input"></label>
+            <input type="number" id="birth-year-input" placeholder="Enter year of birth" />
+            <button class="buttonRegister" onclick="registerNewPatientClick()">Register new user</button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

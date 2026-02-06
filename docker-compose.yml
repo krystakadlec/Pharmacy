@@ -1,0 +1,39 @@
+services:
+  # Container for database
+  db:
+    image: postgres:15-alpine
+    container_name: pharmacy-db
+    environment:
+      - POSTGRES_DB=tjv
+      - POSTGRES_USER=tjv
+      - POSTGRES_PASSWORD=tjv
+    ports:
+      - "5432:5432"
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+    container_name: pharmacy-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=tjv
+      - spring.datasource.username=tjv
+      - spring.datasource.password=tjv
+    depends_on:
+      - db
+
+  # Frontend application
+  frontend:
+    build:
+      context: ./frontend
+    container_name: pharmacy-frontend
+    ports:
+      - "8081:8081"
+    environment:
+      - BACKEND_API_URL=http://backend:8080/rest/api
+    depends_on:
+      - backend

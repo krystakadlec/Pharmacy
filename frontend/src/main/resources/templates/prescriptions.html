@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescriptions Manager</title>
+    <link th:href="@{/css/prescriptions.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/prescriptions.js}"></script>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Prescriptions Manager</h1>
+    </header>
+
+    <div class="button-container">
+        <button class="btn" onclick="window.location='/'">Back to Login</button>
+        <button class="btn primary" id="button-createPrescription" onclick="createPrescriptionClick()">Create Prescription</button>
+    </div>
+
+    <div class="medicines-container">
+        <label for="medicines">Add medicine to prescription:</label>
+        <select id="medicines" class="medicineSelect"></select>
+            <div class="button-container">
+                <button class="btn primary" id="button-addMedicine" onclick="addMedicineClick()" disabled>Add medicine to prescription</button>
+                <button class="btn danger" id="button-removeMedicine" onclick="removeMedicineClick()" disabled>Remove medicine from prescription</button>
+            </div>
+    </div>
+
+
+
+    <div class="preview-container">
+        <h2>Prescription Preview</h2>
+        <p><strong>Patient ID:</strong> <span id="preview-patient-id">N/A</span></p>
+        <p><strong>Date:</strong> <span id="preview-date">N/A</span></p>
+        <p><strong>Medicines:</strong></p>
+        <ul id="preview-medicines">
+            <li>No medicines added yet.</li>
+        </ul>
+        <p><strong>Total Price:</strong> <span id="preview-total-price">0.00 Kč</span></p>
+    </div>
+
+    <div class="history-container">
+        <h2>
+            <button id="history-toggle" class="history-toggle-btn">Medicine History</button>
+        </h2>
+        <ul id="history-list" class="history-list">
+            <li>No history available.</li>
+        </ul>
+    </div>
+
+    <div class="prescriptions-container">
+        <h2>Prescriptions</h2>
+        <table id="prescriptions-table">
+            <thead>
+            <tr>
+                <th>Select</th>
+                <th>Prescription ID</th>
+                <th>Date</th>
+                <th>Total Price</th>
+                <th>Discount</th>
+            </tr>
+            </thead>
+            <tbody id="prescriptions-list">
+            <tr><td colspan="5">No prescriptions available.</td></tr>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button class="btn danger" id="button-deletePrescription" onclick="deletePrescriptionClick()" disabled>Delete selected prescription</button>
+            <button class="btn discount" id="button-applyDiscount" onclick="applyDiscountClick()" disabled>Apply prescription discount</button>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeMedicineSelection();
+        updatePrescriptionPreview();
+        loadPrescriptions();
+
+        const historyToggleBtn = document.getElementById('history-toggle');
+        const historyContainer = document.querySelector('.history-container');
+
+        historyToggleBtn.addEventListener('click', function() {
+            historyContainer.classList.toggle('expanded');
+        });
+
+        loadMedicineHistory();
+    });
+</script>
+</body>
+</html>
+

@@ -1,0 +1,262 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fc;
+    color: #444;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffffff, #f1f3f8);
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #3a4c87;
+    font-weight: bold;
+}
+
+
+.button-container {
+    display: flex;
+    gap: 15px;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: #e1e1e1;
+    color: #aaa;
+}
+
+button.primary {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+button.primary:hover {
+    background-color: #43a047;
+    box-shadow: 0px 6px 15px rgba(76, 175, 80, 0.3);
+}
+
+
+button.danger {
+    background-color: #f44336;
+    color: #fff;
+}
+
+button.danger:hover {
+    background-color: #e53935;
+    box-shadow: 0px 6px 15px rgba(244, 67, 54, 0.3);
+}
+
+button.discount {
+    background-color: #03a9f4;
+    color: #fff;
+}
+
+button.discount:hover {
+    background-color: #039be5;
+    box-shadow: 0px 6px 15px rgba(3, 169, 244, 0.3);
+}
+
+
+.medicines-container {
+    margin-bottom: 30px;
+}
+
+.medicines-container label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+    color: #3a4c87;
+}
+
+.medicineSelect {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.medicineSelect:focus {
+    border-color: #4caf50;
+}
+
+
+.preview-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.preview-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #3a4c87;
+    text-align: center;
+}
+
+.preview-container p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.preview-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.preview-container ul li {
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+#preview-total-price {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #388e3c;
+}
+
+
+.history-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.history-container h2 {
+    font-size: 1.8rem;
+    color: #3a4c87;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.history-toggle-btn {
+    background-color: #e1e1e1;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.history-toggle-btn:hover {
+    background-color: #aaaaaa;
+}
+
+.history-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: none;
+}
+
+.history-list li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #e3f2fd;
+    color: #1e88e5;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+
+.history-container.expanded .history-list {
+    display: block;
+}
+
+
+.prescriptions-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.prescriptions-container th,
+.prescriptions-container td {
+    padding: 15px;
+    text-align: center;
+    color: #555;
+}
+
+.prescriptions-container th {
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.prescriptions-container td {
+    border-bottom: 1px solid #ddd;
+}
+
+.prescriptions-container tr:hover {
+    background-color: #f1f8e9;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
