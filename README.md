@@ -10,9 +10,10 @@ Demonstruje třívrstvou architekturu v Javě a plnou kontejnerizaci.
 - Historie: Přehled všech objednaných léků.
 
 ## Spuštění
-Ke spuštění stačí pouze Docker.
+Ke spuštění stačí pouze Docker (opomeneme-li ostatní věci nutné ke stáhnutí Dockeru, jakožto počítač, prohlížeč, internet...).
 
 **1. Stáhněte projekt**
+
 do terminálu zadejte:
 ```bash
 git clone https://github.com/krystakadlec/Pharmacy.git
